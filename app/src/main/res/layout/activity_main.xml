@@ -14,32 +14,18 @@
         android:src="@drawable/vsb"/>
 
     <TextView
-        android:id="@+id/textViewRe"
+        android:id="@+id/textViewZoom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:text="Re:"/>
+        android:text="Zoom"
+        tools:text="Zoom"/>
 
     <SeekBar
-        android:id="@+id/seekBarRe"
+        android:id="@+id/seekBarZoom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="30"
-        android:progress="1"/>
-
-    <TextView
-        android:id="@+id/textViewIm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:text="Im:"/>
-
-    <SeekBar
-        android:id="@+id/seekBarIm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="100"
-        android:progress="1"/>
+        android:layout_height="38dp"
+        android:max="40"
+        android:progress="10"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,32 +33,36 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button"/>
+            android:text="left"
+            android:onClick="buttonClick"/>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button"/>
+            android:text="right"
+            android:onClick="buttonClick"/>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button"/>
+            android:text="up"
+            android:onClick="buttonClick"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnDown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button"/>
+            android:text="Button"
+            android:onClick="buttonClick"/>
     </LinearLayout>
 
 </LinearLayout>

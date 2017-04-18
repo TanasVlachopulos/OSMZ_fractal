@@ -19,7 +19,7 @@ Java_com_example_kru13_bitmaptest_MainActivity_stringFromJNI(
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_example_kru13_bitmaptest_MainActivity_bitmapChange(JNIEnv *env, jobject obj, jobject img, jdouble re, jdouble im) {
+Java_com_example_kru13_bitmaptest_MainActivity_bitmapChange(JNIEnv *env, jobject obj, jobject img, jdouble xPos, jdouble yPos, jdouble zoom) {
     AndroidBitmapInfo info;
     void *pixels;
     int ret;
@@ -54,12 +54,12 @@ Java_com_example_kru13_bitmaptest_MainActivity_bitmapChange(JNIEnv *env, jobject
     uint32_t *imgp = (uint32_t *) pixels;
 
 //    double MinRe = -2.0;
-    double MinRe = re;
+    double MinRe = xPos;
 //    double MaxRe = 1.0;
-    double  MaxRe = re + 3;
+    double  MaxRe = xPos + zoom;
 //    double MaxRe = re;
 //    double MinIm = -1.2;
-    double MinIm = im;
+    double MinIm = yPos;
     double ImageHeight = info.height;
     double ImageWidth = info.width;
     double scaleFactor = (ImageHeight / ImageWidth);

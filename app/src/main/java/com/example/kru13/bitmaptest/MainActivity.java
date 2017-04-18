@@ -20,12 +20,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 		System.loadLibrary("native-lib");
 	}
 
-	private TextView labelSeekBarIm;
-	private TextView labelSeekBarRe;
-
 	private double re = -2.0;
 	private double im = -1.2;
+	private double xPos = -2.0;
+	private double yPos = -1.0;
+	private double zoom = 3.0;
+	private final double xStep = 0.2;
+	private final double yStep = 0.2;
+	private final double zoomStep = 0.1;
+	private final double zoomMax = 4;
 	private double imgViewWidth, imgViewHeight;
+	private TextView labelZoom;
 
 
 	/**
@@ -34,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 	 */
 	public native String stringFromJNI();
 
-	private native void bitmapChange(Bitmap img, double re, double im);
+	private native void bitmapChange(Bitmap img, double xPos, double yPos, double zoom);
 
 	ImageView imgview;
 
@@ -90,13 +95,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
 		imgview.setOnTouchListener(this);
 
-		SeekBar seekBarRe = (SeekBar) findViewById(R.id.seekBarRe);
-		SeekBar seekBarIm = (SeekBar) findViewById(R.id.seekBarIm);
-		seekBarIm.setOnSeekBarChangeListener(this);
-		seekBarRe.setOnSeekBarChangeListener(this);
+		SeekBar seekBarZoom = (SeekBar) findViewById(R.id.seekBarZoom);
+		seekBarZoom.setOnSeekBarChangeListener(this);
 
-		this.labelSeekBarRe = (TextView) findViewById(R.id.textViewRe);
-		this.labelSeekBarIm = (TextView) findViewById(R.id.textViewIm);
+		this.labelZoom = (TextView) findViewById(R.id.textViewZoom);
 
 		refreshFractal();
 	}
@@ -106,13 +108,22 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 		Log.d("NDK bitmapChanged", "Starting ...");
 
 		// Example of a call to a native method
-		bitmapChange(img, re, im);
+		bitmapChange(img, xPos, yPos, zoom);
 
 		Log.d("NDK bitmapChanged", "Finished");
 		imgview.setImageBitmap(img);
 	}
 
 	public void buttonClick(View v) {
+		if (v.getId() == R.id.btnDown) {
+			yPos += yStep;
+		} else if (v.getId() == R.id.btnUp) {
+			yPos -= yStep;
+		} else if (v.getId() == R.id.btnLeft) {
+			xPos += xStep;
+		} else if (v.getId() == R.id.btnRight) {
+			xPos -= xStep;
+		}
 		refreshFractal();
 	}
 
@@ -140,12 +151,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
-		if (seekBar.getId() == R.id.seekBarIm) {
-			im = ((double) i - 50) / 10;
-			labelSeekBarIm.setText("Im: " + Double.toString(im));
-		} else if (seekBar.getId() == R.id.seekBarRe) {
-			re = ((double) i - 20) / 10;
-			labelSeekBarRe.setText("Re: " + Double.toString(re));
+		if (seekBar.getId() == R.id.seekBarZoom) {
+			zoom = ((zoomMax * 10) - (double) i ) / 10;
+			labelZoom.setText("Zoom " + Double.toString(4 - zoom));
 		}
 	}
 
