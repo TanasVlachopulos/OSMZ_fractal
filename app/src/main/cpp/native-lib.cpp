@@ -48,8 +48,8 @@ Java_com_example_kru13_bitmaptest_MainActivity_bitmapChange(JNIEnv *env, jobject
 
 
     LOGI("start");
-    LOGI("info height: %d", info.height);
-    LOGI("info width : %d", info.width);
+//    LOGI("info height: %d", info.height);
+//    LOGI("info width : %d", info.width);
 
     uint32_t *imgp = (uint32_t *) pixels;
 
